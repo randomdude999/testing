@@ -1,10 +1,10 @@
 git config --global user.email "travis@travis-ci.org"
 git config --global user.name "Travis CI"
 
-# git checkout -b master
+# this may need changing
 git checkout master
 git add test_file_$TRAVIS_BUILD_NUMBER
-git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
+git commit --message "Automatically fix formatting using clang-format [ci skip]"
 
 # echo Key: $encrypted_46195950b351_key
 # echo IV: $encrypted_46195950b351_iv
