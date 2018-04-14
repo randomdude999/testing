@@ -1,19 +1,23 @@
 git config --global user.email "travis@travis-ci.org"
 git config --global user.name "Travis CI"
 
-# this may need changing
-git checkout master
-git add test_file_$TRAVIS_BUILD_NUMBER
-git commit --message "Automatically fix formatting using clang-format [ci skip]"
+git fetch --all # update repo
+if [ $(git rev-parse HEAD) == $(git rev-parse $TRAVIS_BRANCH) ]; then
+    # we are on the latest commit of the branch
+    git checkout $TRAVIS_BRANCH # to get out of detached head
+    git add . # add all modified files
+    git commit --message "Automatically fix formatting using clang-format [ci skip]"
 
-# echo Key: $encrypted_46195950b351_key
-# echo IV: $encrypted_46195950b351_iv
+    # decrypt SSH key
+    openssl aes-256-cbc -K $encrypted_960ca19ad916_key -iv $encrypted_960ca19ad916_iv -in key.enc -out key -d
+    # set correct permissions on key (ssh-add will decline it otherwise)
+    chmod 600 key
+    # start SSH agent
+    eval $(ssh-agent -s)
+    ssh-add key 
 
-# openssl aes-256-cbc -K $encrypted_46195950b351_key -iv $encrypted_46195950b351_iv -in key.enc -out key -d
-openssl aes-256-cbc -K $encrypted_960ca19ad916_key -iv $encrypted_960ca19ad916_iv -in key.enc -out key -d
-eval $(ssh-agent -s)
-chmod 600 key
-ssh-add key 
-
-git remote add origin-asdf ssh://git@github.com/randomdude999/testing.git
-git push --set-upstream origin-asdf master
+    # add remote using ssh
+    git remote add origin-ssh ssh://git@github.com/randomdude999/testing.git
+    # no need to do set-upstream since we won't be pulling from this remote again
+    git push origin-ssh $TRAVIS_BRANCH
+fi
