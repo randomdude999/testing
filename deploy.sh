@@ -2,6 +2,7 @@ git config --global user.email "travis@travis-ci.org"
 git config --global user.name "Travis CI"
 
 # git checkout -b master
+git checkout master
 git add test_file_$TRAVIS_BUILD_NUMBER
 git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
 
