@@ -1,0 +1,5 @@
+script:
+- echo "Testing" > test_file_$TRAVIS_BUILD_NUMBER
+after_success:
+- "./deploy.sh"
+if: sender != "Travis CI"
