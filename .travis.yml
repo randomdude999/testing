@@ -3,4 +3,4 @@ script:
 after_success:
 - chmod +x deploy.sh
 - "./deploy.sh"
-if: sender != "Travis CI"
+if: branch != master
