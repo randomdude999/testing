@@ -11,7 +11,8 @@ git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
 # openssl aes-256-cbc -K $encrypted_46195950b351_key -iv $encrypted_46195950b351_iv -in key.enc -out key -d
 openssl aes-256-cbc -K $encrypted_960ca19ad916_key -iv $encrypted_960ca19ad916_iv -in key.enc -out key -d
 eval $(ssh-agent -s)
-ssh-add ./key 
+chmod 600 key
+ssh-add key 
 
-git remote add origin-asdf git@github.com/randomdude999/testing.git
+git remote add origin-asdf ssh://git@github.com/randomdude999/testing.git
 git push --set-upstream origin-asdf master
