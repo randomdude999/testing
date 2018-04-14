@@ -1,5 +1,4 @@
 script:
 - echo "Testing" > test_file_$TRAVIS_BUILD_NUMBER
 after_success:
-- chmod +x deploy.sh
 - "./deploy.sh"
