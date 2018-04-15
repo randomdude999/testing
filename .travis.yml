@@ -9,5 +9,6 @@ jobs:
     - stage: deploy
       script: ./deploy.sh
 stages:
+  - test
   - name: deploy
     if: type IN (push)

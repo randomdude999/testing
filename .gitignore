@@ -1,0 +1,3 @@
+
+# to prevent travis from committing the decypted key back to the repo
+key
