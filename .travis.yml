@@ -1,4 +1,13 @@
 script:
-- echo "Testing" > test_file_$TRAVIS_BUILD_NUMBER
-after_success:
-- "./deploy.sh"
+  - ./script.sh
+env:
+  matrix:
+    - test1=lol
+    - test1=lol2
+jobs:
+  include:
+    - stage: deploy
+      script: ./deploy.sh
+stages:
+  - name: deploy
+    if: type IN (push)
