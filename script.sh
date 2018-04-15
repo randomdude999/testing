@@ -1,4 +1,4 @@
-echo "Testing" > test_file_$TRAVIS_BUILD_NUMBER
+echo "Testing" > test_file
 if [ "$test1" == "fail" ]; then
     exit 1
 fi

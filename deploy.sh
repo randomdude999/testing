@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # in prod this would be running clang-format
-echo "asdf" > test_$TRAVIS_BUILD_NUMBER
+echo "asdf" > test_f
 
 # Configure user
 git config --global user.email "travis@travis-ci.org"

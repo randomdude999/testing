@@ -3,7 +3,7 @@ script:
 env:
   matrix:
     - test1=lol
-    - test1=fail
+    - test1=lol2
 jobs:
   include:
     - stage: deploy
